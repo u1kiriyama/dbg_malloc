@@ -1,0 +1,19 @@
+OBJS = dbg_malloc.o dbg_malloc_sub.o dbg_malloc_print.o
+TARGET ?= libdbg_malloc.a
+CC ?= gcc
+AR ?= ar
+CFLAGS += -O0
+CFLAGS += -Wall
+
+.SUFFIXES: .c .o
+
+all : $(TARGET)
+
+$(TARGET) : $(OBJS)
+	$(AR) ruc $(TARGET) $(OBJS)
+
+.c.o : $<
+	$(CC) -g -c $< $(CFLAGS)
+
+clean : 
+	rm -f $(OBJS) $(TARGET)

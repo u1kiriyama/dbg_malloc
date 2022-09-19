@@ -1,0 +1,19 @@
+OBJS = main.o
+TARGET ?= sample
+CC ?= gcc
+CFLAGS += -O0
+CFLAGS += -Wall
+LIBS += -ldbg_malloc
+LIBDIRS += -L.
+
+.SUFFIXES: .c .o
+
+all : $(TARGET)
+
+$(TARGET) : $(OBJS)
+	$(CC) -g $(OBJS) -o $(TARGET) $(CFLAGS) $(LIBDIRS) $(LIBS)
+
+.c.o : $<
+	$(CC) -g -c $< $(CFLAGS)
+
+clean : rm -f $(OBJS) $(TARGET)
